@@ -1,0 +1,332 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>FlexEdit: Flexible and Controllable Diffusion-based Object-centric Image Editing</title>
+    <link href="./Image/style.css" rel="stylesheet">
+    <script type="text/javascript" src="./Image/jquery.mlens-1.0.min.js"></script>
+    <script type="text/javascript" src="./Image/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <h1><strong>FlexEdit: Flexible and Controllable Diffusion-based Object-centric Image Editing</strong></h1>
+        <p id="authors"><a class="hover-underline-animation-blue" href=""
+                style="color: #224b8d; text-decoration: none;">Trong-Tung Nguyen</a><sup>1</sup></a>&nbsp;
+            <a class="hover-underline-animation-blue" href=""
+                style="color: #224b8d; text-decoration: none;">Duc-Anh Nguyen</a><sup>1</sup></a>&nbsp;
+            <a class="hover-underline-animation-blue" href="https://scholar.google.com/citations?user=FYZ5ODQAAAAJ&hl=en"
+                style="color: #224b8d; text-decoration: none;">Anh Tran</a><sup>1</sup></a>&nbsp;
+            <a class="hover-underline-animation-blue" href="https://scholar.google.com/citations?user=tDWY0U8AAAAJ&hl=vi"
+                style="color: #224b8d; text-decoration: none;">Cuong Pham</a><sup>1,2</sup></a>&nbsp;
+            <br>
+            <br>
+            <span style="font-size: 24px;">
+                <a class="hover-underline-animation-black" href="https://www.vinai.io/"
+                    style="color: black; text-decoration: none; margin-right: 30px;">
+                    <sup>1</sup>VinAI Research, Vietnam
+                </a>
+                <a class="hover-underline-animation-black" href=""
+                    style="color: black; text-decoration: none;">
+                    <sup>2</sup>Posts & Telecom. Inst. of Tech., Vietnam&nbsp;
+                </a>
+                <!-- <br><br> -->
+                <!-- ICCV 2023 -->
+            </span>
+        </p>
+        
+        <!-- <h4 style="text-align:center"><em>It’s like a security booth; once the subject is protected, he/she cannot be synthesized … even in your dreams.</em></h4> -->
+        <br>
+
+        <img src="./Image/ECCV-Teaser.png" class="teaser-gif" style="width:95%;"><br>
+        
+        <font size="+2">
+            <p style="text-align: center;">
+                <a class="btn btn-primary rounded-pill" href="https://arxiv.org/abs/2303.15433" role="button"
+                    style="color: black;background-color: black;">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    &nbsp;
+                    <span>Paper</span>
+                </a> &emsp;
+                <a class="btn btn-primary rounded-pill" href="https://github.com/VinAIResearch/Anti-DreamBooth.git"
+                    role="button" style="color: black;background-color: black;">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    &nbsp;
+                    <span>Code</span>
+                </a> &emsp;
+                <a class="btn btn-primary rounded-pill" href="#robustness" role="button"
+                    style="color: black;background-color: black;">
+                    <span class="icon">
+                        <i class="fa-solid fa-star"></i>
+                    </span>
+                    &nbsp;
+                    <span>Demo</span>
+                </a> &emsp;
+                <a class="btn btn-primary rounded-pill" href="Image/bibtex.txt" role="button"
+                    style="color: black;background-color: black;">
+                    <span class="icon">
+                        <i class="fa-solid fa-quote-right"></i>
+                    </span>
+                    &nbsp;
+                    <span>BibTex</span>
+                </a> &emsp;
+
+                <!-- (<font color="#C70039">new!</font>) -->
+                <!-- <img class="new-icon" src="./Image/new_icon.png" style="width:5%;"> -->
+            </p>
+        </font>
+        
+
+        
+        
+        <!-- <font size="+2">
+            <p>Our framework could achieve robust and flexible control over several text-guided object-centric editing scenarios, including: </p>
+            <ol>
+                <p>a) Replacing objects <strong>with controllable size and position</strong>,</p>
+                <p>b) Adding new objects in a natural way <strong>without additional mask input</strong></p>
+                <p>c) Removing objects without compromising the quality of the original image.</p>
+            </ol>
+        </font> -->
+    </div>
+    <!-- <div class="content">
+    <h2> &#11088; News</h2>
+    <i class="fa-regular fa-sparkles" style="color: #f9bd1a;"></i>
+    <ul>
+      <li>Apr 01, 2023&emsp;&emsp;&emsp;&emsp;&emsp;Add Robustness Evaluation section.</li>
+    </ul>
+    
+  </div> -->
+  
+    <div class="content">
+        <h2 style="text-align:center;">Abstract</h2>
+        <p>Our work addresses limitations seen in previous approaches for object-centric editing problems, 
+            such as unrealistic results due to shape discrepancies and limited control in object replacement 
+            or insertion. To this end, we introduce FlexEdit, a flexible and controllable editing framework 
+            for objects where we iteratively adjust latents at each denoising step using our FlexEdit block. 
+            Initially, we optimize latents at test time to align with specified object constraints. 
+            Then, our framework employs an adaptive mask, automatically extracted during denoising, to protect 
+            the background while seamlessly blending new content into the target image. 
+            We demonstrate the versatility of FlexEdit in various object editing tasks and curate 
+            an evaluation test suite with samples from both real and synthetic images, along with novel 
+            evaluation metrics designed for object-centric editing. We conduct extensive experiments on 
+            different editing scenarios, demonstrating the superiority of our editing framework over recent 
+            advanced text-guided image editing methods.</p>
+    </div>
+
+    <!-- <div class="content">
+        <h2>Motivation</h2>
+        <p> By finetuning a text-to-image model using DreamBooth, a malicious attacker is able to generate different
+            images
+            of a specific person/concept (denoted as <span style="color: red">sks</span>) in different contexts, for a
+            purpose
+            of (1) creating highly-sensitive content,
+            (2) stealing artistic style, or (3) spreading misinformation. Hence, our motivation is to prevent such
+            scenarios
+            by processing the subject's images
+            before online release.</p>
+        <br>
+        <img class="summary-img" src="./Image/motivation_new.svg" style="width:95%;"> <br>
+        *The black censor is manually added. <i>To avoid causing unwanted negative impacts on real people, (1) is
+            generated from a DreamBooth model trained on images of a virtual character collected from <a
+                class="hover-underline-animation" href="https://twitter.com/theaiidols"
+                style="color: #EA48CA; text-decoration: none;">Ai-idols Studio</a>.</i>
+    </div> -->
+    
+    <div class="content">
+        <h2>Method</h2>
+        <p>FlexEdit achieves object-centric image editing based on denoising diffusion process built upon
+            the Stable Diffusion model. Specifically,
+            we manipulate the noisy latents at each time step via two main components: an iterative
+            test-time optimization via loss constraints, and a masking mechanism
+            with adaptive mask. Initially, we design several constraints via loss function and iteratively
+            optimize noisy latents at each time step to enforce
+            editing semantic alignment. Subsequently, we apply a masking mechanism where we blend source and
+            target noisy latent codes with an adaptive mask constructed
+            using both static source object and dynamic target object mask. </p>
+        <br>
+        <img src="./image_assets/methods/diagram_flexedit.png" style="width: 100%;"> <br>
+        <p class="has-text-centered">
+            <b>Overview of FlexEdit framework</b>. Given an input image I, we first bring it
+            to the intermediate source latents through an inversion process. Subsequently, the de-
+            noising process starts from \( z_T^* \)
+            cloned from \( z_T \) after the inversion process and progresses
+            toward \( z_0^* \)
+            , which is then decoded to get the edited image \( I^* \). At each denoising step,
+            our FlexEdit block manipulates the noisy latent code through two main submodules:
+            latent optimization (shown in <strong
+                style="font-size: larger; color:rgb(10, 7, 217);">blue</strong>), and latent blending
+            (shown in <strong style="font-size: larger; color:rgb(228, 100, 8);">orange</strong>).
+            This is to achieve editing semantics as well as to maintain high fidelity to the source
+            image. If
+            the iterative process (shown in <strong
+                style="font-size: larger; color:rgb(9, 128, 9);">green</strong>) is not executed, our
+            FlexEdit would return \( z_t^* \).
+        </p>
+    </div>
+
+    <div class="content">
+        <h2>Controllable Position</h2>
+        <p>...</p>
+        <img src="Image/controllable_position.png" style="width: 100%;"> <br>
+    </div>
+
+    <div class="content">
+        <h2>Controllable Size</h2>
+        <p>...</p>
+        <img src="Image/controllable_size.png" style="width: 100%;"> <br>
+    </div>
+
+    <div class="content">
+        <h2>Mask-free Object Addition</h2>
+        <p>...</p>
+        <img src="Image/mask-free-addition.png" style="width: 100%;"> <br>
+    </div>
+
+    <div class="content">
+        <h2>Quantiative Results</h2>
+        <p>...</p>
+        <img src="image_assets/experimental_results/quantiative_table_results.png" width="100%">
+    </div>
+    <!-- qualitative -->
+
+    <div class="content">
+        <h2>Qualitative Results</h2>
+        <p>...</p>
+        <img src="image_assets/experimental_results/qualitative_results.png" width="100%">
+    </div>
+
+    <div class="content">
+        <h2>Object Addition</h2>
+        <p>...</p>
+        <img src="Image/more_add.png" style="width: 100%;"> <br>
+    </div>
+
+    <div class="content">
+        <h2>Object Replacement</h2>
+        <p>...</p>
+        <img src="Image/more_replace.png" style="width: 100%;"> <br>
+    </div>
+
+    <div class="content">
+        <h2>Object Removal</h2>
+        <p>...</p>
+        <img src="Image/more_remove.png" style="width: 100%;"> <br>
+    </div>
+
+    <!-- <div class="content" id="robustness">
+        <h2>Real-world Settings</h2>
+
+        <p>To evaluate the robustness of the proposed Anti-DreamBooth, we conducted extensive experiments using various
+            simple image processing techniques. <i>Swipe left and right the image below to see more in detail.</i></p>
+
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <p>Firstly, we examine a scenario where the malicious attacker applies <a
+                            class="hover-underline-animation" href="https://en.wikipedia.org/wiki/Gaussian_blur"
+                            style="color: #EA48CA; text-decoration: none;">Gaussian
+                            blur</a> to perturbed images before DreamBooth finetuning. Evidently, the
+                        overall quality of the generated images remains low, with blurry texture and unnatural
+                        backgrounds. </p>
+                    <img src="./Image/robustness_gaussian_blur_compact.png" style="width:100%;">
+                </div>
+                <div class="swiper-slide">
+                    <p>Not only blur, but our method is also resilient to <a class="hover-underline-animation"
+                            href="https://en.wikipedia.org/wiki/JPEG"
+                            style="color: #EA48CA; text-decoration: none;">JPEG
+                            compression</a>, a widely-used image compression algorithm. Noticeable artifacts
+                        can be seen in the generated images due to the degradation from either our method or the
+                        compression itself.</p>
+                    <img src="./Image/robustness_jpeg_compression_compact.png" style="width:100%;">
+                </div>
+                <div class="swiper-slide">
+                    <p>Last but not least, we tested our method against the <a class="hover-underline-animation"
+                            href="https://github.com/lllyasviel/AdverseCleaner"
+                            style="color: #EA48CA; text-decoration: none;">Adverse
+                            Cleaner</a> which is, as its name suggests, a library for cleaning adversarial noise.
+                        Notably, our defense method demonstrated
+                        its robustness even against the smoothing effect of this sophisticated denoiser.</p>
+                    <img src="./Image/robustness_adverse_cleaner_compact.png" style="width:100%;">
+                </div>
+            </div>
+            <br>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <p>
+            Even though the above results indicate that our defense scheme withstands basic image processing techniques,
+            we acknowledge that these methods do not represent all potential attacks to bypass our protection.
+            Thus, we plan to explore additional algorithms to improve our defense robustness in future works further, as
+            mentioned in the Conclusions section of our paper.
+        </p>
+    </div> -->
+
+    <div class="content">
+        <h2>BibTex</h2>
+        <code> @InProceedings{nguyen_etal2024flexedit,<br>
+  &nbsp;&nbsp;title={FlexEdit: Flexible and Controllable Diffusion-based Object-centric Image Editing},<br>
+  &nbsp;&nbsp;author={Tung Trong Nguyen, Anh Duc Nguyen, Anh Tran and Cuong Pham},<br>
+  &nbsp;&nbsp;journal={arXiv preprint arXiv:2403.18605},<br>
+  &nbsp;&nbsp;year={2024}<br>
+  } </code>
+    </div>
+    <div class="content" id="acknowledgements">
+        <p><strong>Acknowledgements</strong>:
+            <!-- We thank Nataniel Ruiz, Yuanzhen Li, Varun Jampani, Yael Pritch, Michael Rubinstein, and Kfir Aberman for
+            the
+            wonderful work DreamBooth and its <a class="hover-underline-animation" href="https://dreambooth.github.io/"
+                style="color: #EA48CA; text-decoration: none">project page</a>. Finally, a special "thank you" to
+            Stability AI,
+            RunwayML and CompVis for publishing different version of pretrained Stable Diffusion models. -->
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+    <script>
+        const sliders = document.getElementsByClassName('swiper');
+        const swiper0 = new Swiper(sliders[0], {
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        const swiper1 = new Swiper(sliders[1], {
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        const swiper2 = new Swiper(sliders[2], {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
+
+</body>
+
+</html>
