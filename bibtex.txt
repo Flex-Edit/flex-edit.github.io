@@ -1,6 +1,9 @@
-@article{nguyen_etal2024flexedit,
-  title={FlexEdit: Flexible and Controllable Diffusion-based Object-centric Image Editing},
-  author={Tung Trong Nguyen, Anh Duc Nguyen, Anh Tran and Cuong Pham},
-  journal={arXiv preprint arXiv:2403.18605},
-  year={2024}
+@misc{nguyen2024flexeditflexiblecontrollablediffusionbased,
+      title={FlexEdit: Flexible and Controllable Diffusion-based Object-centric Image Editing}, 
+      author={Trong-Tung Nguyen and Duc-Anh Nguyen and Anh Tran and Cuong Pham},
+      year={2024},
+      eprint={2403.18605},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2403.18605}, 
 }
